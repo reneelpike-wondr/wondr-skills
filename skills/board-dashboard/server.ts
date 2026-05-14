@@ -18,7 +18,7 @@ async function withLock<T>(key: string, fn: () => Promise<T>): Promise<T> {
 }
 
 // ── Types ──
-interface Task { text: string; date?: string; tags: string[]; notes?: string; sessionId?: string; }
+interface Task { text: string; date?: string; due?: string; tags: string[]; notes?: string; sessionId?: string; }
 interface Project {
   slug: string; title: string; category: string; status: string;
   created: string; updated: string;
@@ -64,14 +64,20 @@ function parseTasks(section: string): Task[] {
   for (let i = 0; i < lines.length; i++) {
     const m = lines[i].match(/^- \[[ x~]\] (.+)$/);
     if (m) {
-      const dm = m[1].match(/\((\d{4}-\d{2}-\d{2})\)\s*$/);
-      const text = dm ? m[1].replace(dm[0], "").trim() : m[1];
-      const sm = m[1].match(/<!-- session:([a-f0-9-]+) -->/);
+      const raw = m[1];
+      const duem = raw.match(/\s*\|\s*due:\s*(\d{4}-\d{2}-\d{2})/);
+      const dm = raw.match(/\((\d{4}-\d{2}-\d{2})\)\s*$/);
+      const sm = raw.match(/<!-- session:([a-f0-9-]+) -->/);
+      let text = raw;
+      if (duem) text = text.replace(duem[0], "");
+      if (dm) text = text.replace(dm[0], "");
+      if (sm) text = text.replace(sm[0], "");
+      text = text.trim();
       let notes = "";
       while (i + 1 < lines.length && lines[i + 1].startsWith("  > ")) {
         notes += (notes ? "\n" : "") + lines[++i].slice(4);
       }
-      tasks.push({ text: sm ? text.replace(sm[0], "").trim() : text, date: dm?.[1], tags: autoTag(text), sessionId: sm?.[1], notes: notes || undefined });
+      tasks.push({ text, date: dm?.[1], due: duem?.[1], tags: autoTag(text), sessionId: sm?.[1], notes: notes || undefined });
     }
   }
   return tasks;
@@ -104,13 +110,23 @@ async function loadBoard() {
   return { projects, quick, ideas, tags: [...allTags].sort(), categories: [...allCats].sort(), summary: { totalProjects: projects.length, totalOpen: projects.reduce((s, p) => s + p.totalOpen, 0) + quick.totalOpen, totalActive: projects.reduce((s, p) => s + p.totalActive, 0) + quick.totalActive, totalDone: projects.reduce((s, p) => s + p.totalDone, 0) + quick.totalDone } };
 }
 
+function taskLine(prefix: string, t: Task, includeDate: boolean): string {
+  let line = `${prefix} ${t.text}`;
+  if (t.due) line += ` | due: ${t.due}`;
+  if (includeDate && t.date) line += ` (${t.date})`;
+  if (t.sessionId) line += ` <!-- session:${t.sessionId} -->`;
+  return line + "\n";
+}
+
 function rewriteProject(p: Project): string {
-  let md = `---\nstatus: ${p.status}\ncreated: ${p.created}\nupdated: ${new Date().toISOString().slice(0, 10)}\n---\n\n# ${p.title}\n\n## Open\n`;
-  for (const t of p.tasks.open) { md += `- [ ] ${t.text}${t.sessionId ? ` <!-- session:${t.sessionId} -->` : ""}\n`; if (t.notes) for (const l of t.notes.split("\n")) md += `  > ${l}\n`; }
+  let md = `---\nstatus: ${p.status}\n`;
+  if (p.category && p.category !== "General") md += `category: ${p.category}\n`;
+  md += `created: ${p.created}\nupdated: ${new Date().toISOString().slice(0, 10)}\n---\n\n# ${p.title}\n\n## Open\n`;
+  for (const t of p.tasks.open) { md += taskLine("- [ ]", t, false); if (t.notes) for (const l of t.notes.split("\n")) md += `  > ${l}\n`; }
   md += `\n## In Progress\n`;
-  for (const t of p.tasks.inProgress) { md += `- [~] ${t.text}${t.sessionId ? ` <!-- session:${t.sessionId} -->` : ""}\n`; if (t.notes) for (const l of t.notes.split("\n")) md += `  > ${l}\n`; }
+  for (const t of p.tasks.inProgress) { md += taskLine("- [~]", t, false); if (t.notes) for (const l of t.notes.split("\n")) md += `  > ${l}\n`; }
   md += `\n## Done\n`;
-  for (const t of p.tasks.done) { md += `- [x] ${t.text}${t.date ? ` (${t.date})` : ""}${t.sessionId ? ` <!-- session:${t.sessionId} -->` : ""}\n`; if (t.notes) for (const l of t.notes.split("\n")) md += `  > ${l}\n`; }
+  for (const t of p.tasks.done) { md += taskLine("- [x]", t, true); if (t.notes) for (const l of t.notes.split("\n")) md += `  > ${l}\n`; }
   if (p.context) md += `\n## Context\n${p.context}\n`;
   return md;
 }

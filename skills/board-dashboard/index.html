@@ -3,19 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Board</title>
+<title>wond.r board</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sauce+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--font:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;--r:10px;--rs:6px;--ease:cubic-bezier(.16,1,.3,1)}
-[data-theme="light"]{--bg-0:#f8f8f8;--bg-1:#fff;--bg-2:#f3f3f2;--bg-3:#eaeae9;--border:rgba(0,0,0,.06);--border-h:rgba(0,0,0,.1);--text-1:#1a1a1a;--text-2:#646464;--text-3:#9e9e9e;--text-4:#c4c4c4;--accent:#5b5bd6;--accent-s:rgba(91,91,214,.08);--accent-m:rgba(91,91,214,.15);--green:#2b8a3e;--green-s:rgba(43,138,62,.08);--amber:#c2410c;--amber-s:rgba(194,65,12,.08);--sh:0 1px 3px rgba(0,0,0,.04),0 1px 2px rgba(0,0,0,.02);--sh-h:0 2px 8px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.03)}
-[data-theme="dark"]{--bg-0:#111113;--bg-1:#191a1c;--bg-2:#222325;--bg-3:#2c2d30;--border:rgba(255,255,255,.06);--border-h:rgba(255,255,255,.1);--text-1:#ededef;--text-2:#9e9ea4;--text-3:#65656d;--text-4:#43434a;--accent:#9b9ef0;--accent-s:rgba(155,158,240,.1);--accent-m:rgba(155,158,240,.18);--green:#69db7c;--green-s:rgba(105,219,124,.1);--amber:#ffa94d;--amber-s:rgba(255,169,77,.1);--sh:none;--sh-h:none}
+:root{--font:'Open Sauce Sans','Open Sauce','Helvetica Neue',-apple-system,BlinkMacSystemFont,sans-serif;--font-serif:'Cormorant Garamond','Century Expanded',Georgia,serif;--r:10px;--rs:6px;--ease:cubic-bezier(.16,1,.3,1);--wine:#980204;--sandy:#AC9176;--olive:#999B84;--taupe:#E7DED9;--pop:#FFBAEC;--dovetail:#9DA5C5;--burnt:#E15304;--offwhite:#F9F5F5;--offblack:#282828}
+[data-theme="light"]{--bg-0:#F9F5F5;--bg-1:#FFFFFF;--bg-2:#F1EAE5;--bg-3:#E7DED9;--border:rgba(40,40,40,.08);--border-h:rgba(40,40,40,.16);--text-1:#282828;--text-2:#5C5651;--text-3:#8A847E;--text-4:#B8B0A8;--accent:#980204;--accent-s:rgba(152,2,4,.08);--accent-m:rgba(152,2,4,.16);--green:#999B84;--green-s:rgba(153,155,132,.14);--amber:#E15304;--amber-s:rgba(225,83,4,.10);--sh:0 1px 3px rgba(40,40,40,.05),0 1px 2px rgba(40,40,40,.03);--sh-h:0 2px 10px rgba(152,2,4,.08),0 1px 3px rgba(40,40,40,.04)}
+[data-theme="dark"]{--bg-0:#282828;--bg-1:#33302D;--bg-2:#3F3A35;--bg-3:#4A433D;--border:rgba(249,245,245,.08);--border-h:rgba(249,245,245,.14);--text-1:#F9F5F5;--text-2:#C9C2BC;--text-3:#8A847E;--text-4:#5C5651;--accent:#FFBAEC;--accent-s:rgba(255,186,236,.10);--accent-m:rgba(255,186,236,.20);--green:#999B84;--green-s:rgba(153,155,132,.16);--amber:#E15304;--amber-s:rgba(225,83,4,.14);--sh:none;--sh-h:0 2px 12px rgba(255,186,236,.10)}
 html{font-size:13px}body{font-family:var(--font);background:var(--bg-0);color:var(--text-1);min-height:100vh;-webkit-font-smoothing:antialiased}
 
 .hdr{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px;background:var(--bg-1);border-bottom:1px solid var(--border)}
 .hdr-l{display:flex;align-items:center;gap:16px}
-.logo{font-size:15px;font-weight:700;letter-spacing:-.04em}.logo b{color:var(--accent)}
+.logo{font-family:var(--font-serif);font-size:20px;font-weight:600;letter-spacing:-.01em;line-height:1;color:var(--text-1)}.logo .brand{font-style:italic}.logo .dot{color:var(--accent);font-weight:700;margin:0 -1px}.logo .board-word{font-family:var(--font);font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);margin-left:10px;padding-left:10px;border-left:1px solid var(--border)}
 .hdr-stats{display:flex;gap:5px}
 .hs{font-size:11px;font-weight:600;padding:3px 10px;border-radius:99px;display:flex;align-items:center;gap:3px}
 .hs-o{background:var(--accent-s);color:var(--accent)}.hs-w{background:var(--amber-s);color:var(--amber)}.hs-d{background:var(--green-s);color:var(--green)}
@@ -77,6 +78,11 @@ html{font-size:13px}body{font-family:var(--font);background:var(--bg-0);color:va
 .cd-t{font-size:12px;line-height:1.4}
 .cd-tags{display:flex;flex-wrap:wrap;gap:3px}
 .cd-tag{font-size:9px;font-weight:700;padding:1px 6px;border-radius:3px;text-transform:uppercase;letter-spacing:.03em}
+.due-badge{font-size:9px;font-weight:700;padding:1px 6px;border-radius:3px;text-transform:uppercase;letter-spacing:.03em;background:var(--bg-2);color:var(--text-2);white-space:nowrap}
+.due-badge.due-soon{background:rgba(225,83,4,.14);color:var(--burnt)}
+.due-badge.due-today{background:var(--burnt);color:var(--offwhite)}
+.due-badge.overdue{background:var(--wine);color:var(--offwhite);box-shadow:0 0 0 1px rgba(152,2,4,.30)}
+.proj-overdue-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--wine);box-shadow:0 0 0 2px rgba(152,2,4,.18);flex-shrink:0;margin-right:6px}
 .cd-note{font-size:10px;color:var(--text-3);line-height:1.4;padding:3px 6px;background:var(--bg-2);border-radius:3px;margin-top:2px;white-space:pre-wrap}
 .cd-dt{font-size:10px;color:var(--text-4);white-space:nowrap}
 .cd-a{display:flex;gap:1px;opacity:0;transition:opacity 80ms;flex-shrink:0;position:absolute;top:4px;right:4px;background:var(--bg-1);border-radius:3px;padding:1px}
@@ -115,9 +121,9 @@ html{font-size:13px}body{font-family:var(--font);background:var(--bg-0);color:va
 .tl-check.done{border-color:var(--green);background:var(--green-s);color:var(--green)}
 .tl-check.done:hover{border-color:var(--amber);color:var(--amber);background:var(--amber-s)}
 .tl-priority{font-size:9px;font-weight:700;padding:1px 6px;border-radius:3px;flex-shrink:0;text-transform:uppercase;letter-spacing:.03em}
-.tl-priority.p-high{background:#fef2f2;color:#dc2626}
-.tl-priority.p-med{background:#fff7ed;color:#ea580c}
-.tl-priority.p-low{background:var(--bg-2);color:var(--text-4)}
+.tl-priority.p-high{background:var(--wine);color:var(--offwhite)}
+.tl-priority.p-med{background:var(--burnt);color:var(--offwhite)}
+.tl-priority.p-low{background:var(--bg-2);color:var(--text-3)}
 .tl-text{flex:1;font-size:12.5px;line-height:1.4;color:var(--text-1);min-width:0}
 .tl-text.done-text{text-decoration:line-through;color:var(--text-3)}
 .tl-proj{font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all 120ms}
@@ -134,7 +140,7 @@ html{font-size:13px}body{font-family:var(--font);background:var(--bg-0);color:va
 
 <div class="hdr">
   <div class="hdr-l">
-    <div class="logo"><b>/</b>board</div>
+    <div class="logo"><span class="brand">wond<span class="dot">.</span>r</span><span class="board-word">board</span></div>
     <div class="hdr-stats" id="stats"></div>
   </div>
   <div class="hdr-r">
@@ -153,16 +159,20 @@ html{font-size:13px}body{font-family:var(--font);background:var(--bg-0);color:va
 
 <script>
 // ── Color maps ──
+// ── Wondr brand palette ──
+// Wine #980204, Sandy #AC9176, Olive #999B84, Taupe #E7DED9, Pop #FFBAEC,
+// Dovetail #9DA5C5, Burnt #E15304, Offwhite #F9F5F5, Offblack #282828
 const TAG_COLORS={
-  ghl:{bg:'#eff6ff',text:'#2563eb'},ads:{bg:'#fff7ed',text:'#ea580c'},video:{bg:'#fdf2f8',text:'#db2777'},
-  team:{bg:'#f5f3ff',text:'#7c3aed'},events:{bg:'#f0fdfa',text:'#0d9488'},course:{bg:'#fefce8',text:'#ca8a04'},
-  tech:{bg:'#f1f5f9',text:'#475569'},content:{bg:'#f0fdf4',text:'#16a34a'},finance:{bg:'#fef2f2',text:'#dc2626'},
-  infra:{bg:'#f3f4f6',text:'#6b7280'}
+  crm:{bg:'rgba(157,165,197,.18)',text:'#5C6B91'},ads:{bg:'rgba(225,83,4,.14)',text:'#E15304'},video:{bg:'rgba(255,186,236,.30)',text:'#B83A8A'},
+  team:{bg:'rgba(172,145,118,.20)',text:'#8A7058'},events:{bg:'rgba(152,2,4,.10)',text:'#980204'},course:{bg:'rgba(231,222,217,.60)',text:'#6E5B4E'},
+  tech:{bg:'rgba(40,40,40,.08)',text:'#282828'},content:{bg:'rgba(153,155,132,.20)',text:'#5E6049'},finance:{bg:'rgba(152,2,4,.12)',text:'#980204'},
+  infra:{bg:'rgba(172,145,118,.16)',text:'#8A7058'}
 };
 const CAT_COLORS={
-  'Business':'#3b82f6','Product':'#8b5cf6','Tech':'#475569','Marketing':'#16a34a',
-  'Finance':'#dc2626','Sales':'#ea580c','Operations':'#0d9488',
-  'Ideas':'#a855f7','Quick':'#6366f1','Clients':'#0ea5e9','General':'#9e9e9e'
+  'Business':'#980204','Product':'#9DA5C5','Tech':'#282828','Marketing':'#999B84',
+  'Finance':'#980204','Sales':'#E15304','Operations':'#AC9176',
+  'Ideas':'#FFBAEC','Quick':'#9DA5C5','Clients':'#999B84','General':'#AC9176',
+  'Mon and Co':'#AC9176','Wondr':'#980204'
 };
 
 let B={projects:[],quick:null,ideas:null,tags:[],categories:[],summary:{}};
@@ -185,6 +195,27 @@ function timeAgo(d){
   if(days===0)return'today';if(days===1)return'yesterday';
   if(days<7)return days+'d ago';if(days<30)return Math.floor(days/7)+'w ago';
   return then.toLocaleDateString('en',{month:'short',day:'numeric'});
+}
+
+// ── Due date badge ──
+function dueDays(due){
+  if(!due)return null;
+  const today=new Date();today.setHours(0,0,0,0);
+  const d=new Date(due);d.setHours(0,0,0,0);
+  return Math.round((d-today)/864e5);
+}
+function renderDueBadge(due){
+  const days=dueDays(due);if(days===null)return'';
+  let cls='due-badge',label='';
+  if(days<0){cls+=' overdue';label=(-days)+'d overdue';}
+  else if(days===0){cls+=' due-today';label='Today';}
+  else if(days<=3){cls+=' due-soon';label='Due in '+days+'d';}
+  else if(days<=7){label='Due in '+days+'d';}
+  else{label='Due '+new Date(due).toLocaleDateString('en',{month:'short',day:'numeric'});}
+  return `<span class="${cls}">${label}</span>`;
+}
+function projHasOverdue(p){
+  return [...p.tasks.open,...p.tasks.inProgress].some(t=>{const d=dueDays(t.due);return d!==null&&d<0;});
 }
 
 // ── Priority auto-detection ──
@@ -396,11 +427,13 @@ function rTaskRow(t,status){
   const projClick=`onclick="setView('projects');exp.add('${t.slug}');sE();render()"`;
 
   const priLabel=t.priority==='high'?'<span class="tl-priority p-high">High</span>':t.priority==='med'?'<span class="tl-priority p-med">Med</span>':'';
+  const dueBadge=(!isDone&&t.due)?renderDueBadge(t.due):'';
 
   return `<div class="tl-row">
     <div class="tl-check ${isDone?'done':''}" ${checkAction} title="${checkTitle}">${isDone?'&#10003;':''}</div>
     ${priLabel}
     <span class="tl-text ${isDone?'done-text':''}">${E(t.text)}</span>
+    ${dueBadge}
     <span class="tl-proj" style="background:${cc}12;color:${cc}" ${projClick}>${E(t.projTitle)}</span>
     ${tags}
     <span class="tl-date">${t.date?timeAgo(t.date):(t.projUpdated?timeAgo(t.projUpdated):'')}</span>
@@ -412,7 +445,9 @@ function rProj(p,fe){
   const cc=CAT_COLORS[p.category]||'#9e9e9e';
   const ago=timeAgo(p.updated);
   const isStale=p.updated&&(Date.now()-new Date(p.updated).getTime())/864e5>5;
+  const hasOverdue=projHasOverdue(p);
   return `<div class="proj ${isO?'open':''}"><div class="proj-h" onclick="${fe?'':`tE('${p.slug}')`}">
+    ${hasOverdue?'<span class="proj-overdue-dot" title="Has overdue tasks"></span>':''}
     <span class="proj-title">${E(p.title)}</span>
     ${p.category!=='Quick'&&p.category!=='Ideas'?`<span class="proj-cat" style="background:${cc}12;color:${cc}">${E(p.category)}</span>`:''}
     <div class="prog-w"><div class="prog-d" style="width:${dP}%"></div><div class="prog-a" style="width:${wP}%"></div></div>
@@ -435,7 +470,9 @@ function rCol(sl,key,label,tasks,showAdd){
     if(nx)a+=`<button class="cd-b" onclick="event.stopPropagation();doMove('${sl}','${E(t.text)}','${key}','${nx}')" title="Advance">&#8594;</button>`;
     a+=`<button class="cd-b" onclick="event.stopPropagation();doNote('${sl}','${E(t.text)}','${key}',this)" title="Note">&#9998;</button>`;
     a+=`<button class="cd-b" onclick="event.stopPropagation();doDel('${sl}','${E(t.text)}','${key}')" title="Remove">&#10005;</button>`;
-    const tg=(t.tags?.length)?`<div class="cd-tags">${t.tags.map(x=>{const tc=TAG_COLORS[x]||{bg:'var(--bg-2)',text:'var(--text-4)'};return`<span class="cd-tag" style="background:${tc.bg};color:${tc.text}">${x}</span>`;}).join('')}</div>`:'';
+    const tagPills=(t.tags||[]).map(x=>{const tc=TAG_COLORS[x]||{bg:'var(--bg-2)',text:'var(--text-4)'};return`<span class="cd-tag" style="background:${tc.bg};color:${tc.text}">${x}</span>`;}).join('');
+    const dueBadge=t.due?renderDueBadge(t.due):'';
+    const tg=(tagPills||dueBadge)?`<div class="cd-tags">${tagPills}${dueBadge}</div>`:'';
     const noteH=t.notes?`<div class="cd-note">${E(t.notes)}</div>`:'';
     const dateH=t.date?`<span class="cd-dt">${timeAgo(t.date)}</span>`:'';
     return `<div class="cd" draggable="true" data-slug="${sl}" data-text="${E(t.text)}" data-col="${key}" style="animation-delay:${i*20}ms">

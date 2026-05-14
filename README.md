@@ -52,11 +52,21 @@ bash ~/wondr-skills-src/install.sh
 
 ## After Install — Start the Dashboard
 
+**Option 1 — Run it manually each time:**
+
 ```bash
 bun run ~/board/dashboard/server.ts
 ```
 
 Then open **http://localhost:3333** in your browser.
+
+**Option 2 — Auto-start at login (Recommended, Mac only):**
+
+```bash
+bash ~/.claude/skills/board-dashboard/setup-launchagent.sh
+```
+
+The dashboard now starts automatically every time you log in to your Mac, and restarts itself if it ever crashes. To turn it off later, re-run the same script with `--uninstall`.
 
 ---
 

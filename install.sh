@@ -45,9 +45,10 @@ echo ""
 echo "  Downloading board-dashboard skill..."
 mkdir -p "$SKILL_DIR/commands" "$SKILL_DIR/examples/_active"
 
-for f in SKILL.md server.ts index.html setup.sh; do
+for f in SKILL.md server.ts index.html setup.sh setup-launchagent.sh; do
   curl -fsSL "$REPO_RAW/skills/board-dashboard/$f" -o "$SKILL_DIR/$f"
 done
+chmod +x "$SKILL_DIR/setup.sh" "$SKILL_DIR/setup-launchagent.sh"
 
 for f in board.md board-add.md board-cleanup.md board-scan.md; do
   curl -fsSL "$REPO_RAW/skills/board-dashboard/commands/$f" -o "$SKILL_DIR/commands/$f"
@@ -72,8 +73,11 @@ echo ""
 echo "  ============================================================"
 echo "  All done!"
 echo ""
-echo "  To start the web dashboard, run:"
+echo "  To start the web dashboard once:"
 echo "    bun run ~/board/dashboard/server.ts"
+echo ""
+echo "  Or — make it auto-start every time you log in (Mac only):"
+echo "    bash ~/.claude/skills/board-dashboard/setup-launchagent.sh"
 echo ""
 echo "  Then open http://localhost:3333 in your browser."
 echo "  ============================================================"

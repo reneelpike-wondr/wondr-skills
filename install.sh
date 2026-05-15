@@ -1,7 +1,7 @@
 #!/bin/bash
 # Wondr Skills — One-line installer
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/REPLACE_OWNER/wondr-skills/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/reneelpike-wondr/wondr-skills/main/install.sh | bash
 #
 # What it does:
 #   1. Installs Bun (if missing) — needed for the web dashboard
@@ -11,7 +11,7 @@
 
 set -e
 
-REPO_RAW="https://raw.githubusercontent.com/REPLACE_OWNER/wondr-skills/main"
+REPO_RAW="https://raw.githubusercontent.com/reneelpike-wondr/wondr-skills/main"
 SKILL_DIR="$HOME/.claude/skills/board-dashboard"
 
 echo ""

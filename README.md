@@ -27,7 +27,7 @@ A persistent task board that tracks everything you're working on across all Clau
 Open a terminal and paste this:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/REPLACE_OWNER/wondr-skills/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/reneelpike-wondr/wondr-skills/main/install.sh | bash
 ```
 
 The installer will:
@@ -44,7 +44,7 @@ The installer will:
 If you'd rather see what's happening:
 
 ```bash
-git clone https://github.com/REPLACE_OWNER/wondr-skills.git ~/wondr-skills-src
+git clone https://github.com/reneelpike-wondr/wondr-skills.git ~/wondr-skills-src
 bash ~/wondr-skills-src/install.sh
 ```
 

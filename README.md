@@ -1,8 +1,8 @@
 # Wondr Skills
 
-A growing collection of Claude Code skills curated and shared by [Wondr Agency](https://wondragency.com.au).
+A growing collection of Claude Code skills curated and extended by [Wondr Agency](https://wondragency.com.au).
 
-These are battle-tested skills Renee uses to run Wondr — now packaged so you can install them in one line.
+These are the same tools Renee uses to run Wondr day-to-day — now packaged so you can install them in one line.
 
 ---
 
@@ -10,15 +10,15 @@ These are battle-tested skills Renee uses to run Wondr — now packaged so you c
 
 ### `board-dashboard` — Cross-Session Task Board
 
-A persistent task board that tracks everything you're working on across all Claude Code sessions. Includes a visual web dashboard with kanban boards, drag-and-drop, priority sorting, and real-time updates.
+A persistent task board that tracks everything you're working on across all Claude Code chat sessions. Includes a Wondr-branded web kanban, due dates, overdue badges, auto-categorisation, and optional auto-start at login.
 
+**What you get:**
+- A live kanban dashboard at `http://localhost:3333` (Wondr palette + fonts)
 - 4 slash commands (`/board`, `/board-add`, `/board-cleanup`, `/board-scan`)
-- Auto-categorisation into Business, Product, Tech, Marketing, Finance, Sales, Operations
-- Auto-tagging based on keywords
-- Web dashboard at `http://localhost:3333`
-- TodoWrite integration for a live status bar in every chat
-
-> **Original author:** [Luke Selr](https://gist.github.com/lukeselr/a10b61cbe43d639d28d6a084dd70ed51) — shared under MIT-style attribution. Curated and re-packaged here with credit.
+- Due date syntax (`| due: YYYY-MM-DD`) with **Wine** (overdue), **Burnt** (today/soon), and neutral badges
+- Project headers flag a red dot when anything is overdue
+- Auto-categorisation, auto-tagging, drag-and-drop, real-time updates
+- Optional macOS LaunchAgent — dashboard auto-starts at login, restarts on crash
 
 ---
 
@@ -32,10 +32,10 @@ curl -fsSL https://raw.githubusercontent.com/REPLACE_OWNER/wondr-skills/main/ins
 
 The installer will:
 
-1. Check that **Bun** is installed (and install it if not)
+1. Install **Bun** (the runtime that powers the web dashboard) if it's missing
 2. Copy the skill files into `~/.claude/skills/`
-3. Run the board-dashboard setup script (creates `~/board/`, installs 4 slash commands, loads example projects)
-4. Print the next step (how to start the web dashboard)
+3. Set up the board structure at `~/board/` with example projects
+4. Print the next step (how to start the dashboard)
 
 ---
 
@@ -66,13 +66,13 @@ Then open **http://localhost:3333** in your browser.
 bash ~/.claude/skills/board-dashboard/setup-launchagent.sh
 ```
 
-The dashboard now starts automatically every time you log in to your Mac, and restarts itself if it ever crashes. To turn it off later, re-run the same script with `--uninstall`.
+The dashboard starts automatically every time you log in and restarts itself if it ever crashes. To turn it off later, re-run with `--uninstall`.
 
 ---
 
 ## Slash Commands
 
-Once installed, you can use these inside any Claude Code chat:
+Once installed, use these inside any Claude Code chat:
 
 | Command | What it does |
 |---|---|
@@ -81,6 +81,18 @@ Once installed, you can use these inside any Claude Code chat:
 | `/board-add Buy groceries` | Add a quick one-off task |
 | `/board-cleanup` | Flag stale tasks, archive done projects |
 | `/board-scan` | Auto-populate the board from recent sessions |
+
+---
+
+## Due Dates
+
+Add a due date to any task:
+
+```
+- [ ] Build the landing page | due: 2026-05-19
+```
+
+The dashboard automatically badges it as overdue, due today, or due soon based on today's date.
 
 ---
 
@@ -104,11 +116,11 @@ Re-running the install command updates the skill to the latest version. Your `~/
 
 ---
 
-## License
+## License & Acknowledgments
 
 MIT — see [LICENSE](LICENSE) for full text.
 
-Original board-dashboard work © Luke Selr. Wondr packaging and additions © Renee Pike / Wondr Agency.
+This skill builds on a task-board pattern originally shared by [Luke Selr](https://gist.github.com/lukeselr/a10b61cbe43d639d28d6a084dd70ed51), extended significantly for Wondr with Wondr branding, due dates, overdue surfacing, the LaunchAgent installer, and the SessionStart context hook used in Renee's private setup.
 
 ---
 
